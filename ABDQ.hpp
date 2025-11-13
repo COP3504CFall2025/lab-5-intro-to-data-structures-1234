@@ -55,7 +55,7 @@ public:
         other.back_ = 0;
     }
     ABDQ& operator=(const ABDQ& other) {
-        if (this == other) {
+        if (this == &other) {
             return *this;
         }
         delete[] data_;
@@ -71,7 +71,6 @@ public:
     }
     ABDQ& operator=(ABDQ&& other) noexcept {
         if (this == &other) {
-            other = nullptr;
             other.data_ = nullptr;
             other.capacity_ = 0;
             other.size_ = 0;
