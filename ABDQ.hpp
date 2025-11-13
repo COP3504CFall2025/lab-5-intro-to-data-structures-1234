@@ -106,15 +106,9 @@ public:
             delete[] data_;
             data_ = holder;
         }
-        if (front_ == 0) {
-            front_ = capacity_ - 1;
-            data_[front_] = item;
-            size_++;
-        } else {
-            data_[front_ - 1 ] = item;
-            front_--;
-            size_++;
-        }
+        front_ = (front_ + capacity_ - 1) % capacity_;
+        data_[front_] = item;
+        size_++;
     }
     void pushBack(const T& item) override {
         if (size_ == capacity_) {
@@ -126,15 +120,9 @@ public:
             delete[] data_;
             data_ = holder;
         }
-        if (back_ == capacity_ - 1) {
-            back_ = 0;
-            data_[back_] = item;
-            size_++;
-        } else {
-            back_++;
-            size_++;
-            data_[back_] = item;
-        }
+        back_ = (back_ + 1) % capacity_;
+        data_[back_] = item;
+        size_++;
     }
 
     // Deletion
@@ -143,13 +131,9 @@ public:
             throw std::runtime_error("Empty queue");
         }
         T data = data_[front_];
-        if (front_ == capacity_ - 1) {
-            front_ = 0;
-            size_--;
-        } else {
-            front_++;
-            size_--;
-        }
+        std::size_t index = (front_ + 1) % capacity_;
+        front_ = index;
+        size_--;
         return data;
     }
     T popBack() override {
@@ -157,13 +141,9 @@ public:
             throw std::runtime_error("Empty queue");
         }
         T data = data_[back_];
-        if (back_ == 0) {
-            back_ = capacity_ - 1;
-            size_--;
-        } else {
-            back_--;
-            size_--;
-        }
+        std::size_t index = (back_ + capacity_ - 1) % capacity_;
+        back_ = index;
+        size_--;
         return data;
     }
 
