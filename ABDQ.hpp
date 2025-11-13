@@ -139,8 +139,8 @@ public:
 
     // Deletion
     T popFront() override {
-        if (front_ == back_) {
-            throw std::out_of_range("Empty queue");
+        if (size_ == 0) {
+            throw std::runtime_error("Empty queue");
         }
         T data = data_[front_];
         if (front_ == capacity_ - 1) {
@@ -153,8 +153,8 @@ public:
         return data;
     }
     T popBack() override {
-        if (front_ == back_) {
-            throw std::out_of_range("Empty queue");
+        if (size_ == 0) {
+            throw std::runtime_error("Empty queue");
         }
         T data = data_[back_];
         if (back_ == 0) {
