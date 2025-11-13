@@ -39,7 +39,7 @@ public:
         front_ = other.front_;
         back_ = other.back_;
         for (std::size_t i = front_; i <= back_; i++) {
-            T on = new T(&other.data_[i]);
+            T on = new T(other.data_[i]);
             data_[i] = on;
         }
     }
@@ -56,7 +56,7 @@ public:
         other.back_ = 0;
     }
     ABDQ& operator=(const ABDQ& other) {
-        if (this == &other) {
+        if (this == other) {
             return *this;
         }
         delete[] data_;
@@ -66,7 +66,7 @@ public:
         front_ = other.front_;
         back_ = other.back_;
         for (std::size_t i = front_; i <= back_; i++) {
-            T on = new T(&other.data_[i]);
+            T on = new T(other.data_[i]);
             data_[i] = on;
         }
         return *this;
