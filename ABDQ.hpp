@@ -39,8 +39,7 @@ public:
         front_ = other.front_;
         back_ = other.back_;
         for (std::size_t i = front_; i <= back_; i++) {
-            T on = new T(other.data_[i]);
-            data_[i] = on;
+            data_[i] = other.data_[i];
         }
     }
     ABDQ(ABDQ&& other) noexcept {
@@ -66,8 +65,7 @@ public:
         front_ = other.front_;
         back_ = other.back_;
         for (std::size_t i = front_; i <= back_; i++) {
-            T on = new T(other.data_[i]);
-            data_[i] = on;
+            data_[i] = other.data_[i];
         }
         return *this;
     }
