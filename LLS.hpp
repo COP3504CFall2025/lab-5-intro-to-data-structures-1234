@@ -17,26 +17,26 @@ public:
 
     // Insertion
     void push(const T& item) override {
-        list->addHead(item);
+        list.addHead(item);
     }
 
     // Deletion
     T pop() override {
-        T data = list->getHead();
-        list->removeHead();
+        T data = list.getHead();
+        list.removeHead();
         return data;
     }
 
     // Access
     T peek() const override {
-        return list->getHead();
+        return list.getHead();
     }
 
     //Getters
     std::size_t getSize() const noexcept override {
-        return list->getSize();
+        return list.getSize();
     }
     ~LLS() override {
-        list->~LinkedList<T>();
+        list.~LinkedList<T>();
     }
 };

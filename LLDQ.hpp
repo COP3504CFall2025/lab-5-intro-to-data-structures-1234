@@ -51,6 +51,9 @@ public:
     std::size_t getSize() const noexcept override {
         return list.getSize();
     }
+    ~LLDQ() override {
+        list.~LinkedList<T>();
+    }
 };
 
 
