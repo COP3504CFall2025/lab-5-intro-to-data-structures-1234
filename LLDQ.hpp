@@ -15,9 +15,7 @@ private:
 
 public:
     // Constructor
-    LLDQ() {
-        list = new LinkedList<T>();
-    }
+    LLDQ() = default;
 
     // Core Insertion Operations
     void pushFront(const T& item) override {
