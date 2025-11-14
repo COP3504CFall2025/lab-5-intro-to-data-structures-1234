@@ -36,10 +36,10 @@ public:
         data_ = new T[other.capacity_];
         capacity_ = other.capacity_;
         size_ = other.size_;
-        front_ = other.front_;
-        back_ = other.back_;
-        for (std::size_t i = front_; i <= back_; i++) {
-            data_[i] = other.data_[i];
+        front_ = 0;
+        back_ = size_ - 1;
+        for (std::size_t i = 0; i < size_; i++) {
+            data_[i] = other.data_[(front_ + i) % capacity_];
         }
     }
     ABDQ(ABDQ&& other) noexcept {
@@ -64,8 +64,8 @@ public:
         size_ = other.size_;
         front_ = other.front_;
         back_ = other.back_;
-        for (std::size_t i = front_; i <= back_; i++) {
-            data_[i] = other.data_[i];
+        for (std::size_t i = 0; i < size_; i++) {
+            data_[i] = other.data_[(front_ + i) % capacity_];
         }
         return *this;
     }
@@ -100,8 +100,8 @@ public:
         if (size_ == capacity_) {
             capacity_ *= SCALE_FACTOR;
             T* holder = new T[capacity_];
-            for (std::size_t i = front_; i <= size_; i++) {
-                holder[i] = data_[i];
+            for (std::size_t i = 0; i < size_; i++) {
+                data_[i] = data_[(front_ + i) % capacity_];
             }
             delete[] data_;
             data_ = holder;
@@ -115,7 +115,7 @@ public:
             capacity_ *= SCALE_FACTOR;
             T* holder = new T[capacity_];
             for (std::size_t i = 0; i < size_; i++) {
-                holder[i] = data_[i];
+                holder[i] = data_[(front_ + i) % capacity_];
             }
             delete[] data_;
             data_ = holder;
@@ -152,7 +152,7 @@ public:
         return data_[front_];
     }
     const T& back() const override {
-        return data_[back_];
+        return data_[back_ - 1];
     }
 
     // Getters
