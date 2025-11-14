@@ -29,22 +29,34 @@ public:
 
     // Core Removal Operations
     T popFront() override {
-        T data = list.getHead();
+        if (list.getCount() == 0) {
+            throw std::runtime_error("LLDQ::popFront: Empty list");
+        }
+        T data = list.getHead()->data;
         list.removeHead();
         return data;
     }
     T popBack() override {
-        T data = list.getTail();
+        if (list.getCount() == 0) {
+            throw std::runtime_error("LLDQ::popBack: Empty list");
+        }
+        T data = list.getTail()->data;
         list.removeTail();
         return data;
     }
 
     // Element Accessors
     const T& front() const override {
-        return list.getHead();
+        if (list.getCount() == 0) {
+            throw std::runtime_error("LLDQ::front: Empty list");
+        }
+        return list.getHead()->data;
     }
     const T& back() const override {
-        return list.getTail();
+        if (list.getCount() == 0) {
+            throw std::runtime_error("LLDQ::back: Empty list");
+        }
+        return list.getTail()->data;
     }
 
     // Getter
