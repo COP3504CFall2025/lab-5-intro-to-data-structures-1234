@@ -147,6 +147,7 @@ void LinkedList<T>::clear() {
 		this->head = nullptr;
 		this->tail = nullptr;
 		this->count = 0;
+		return;
 	}
 	Node<T>* current = this->head;
 	for (int i = 0; i < this->count - 1; i++) {
