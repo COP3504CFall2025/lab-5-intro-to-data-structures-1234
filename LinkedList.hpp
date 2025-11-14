@@ -46,7 +46,11 @@ public:
 		head = nullptr;
 		tail = nullptr;
 		count = 0;
-		this = list;
+		Node<T>* on = list.getHead();
+		for (unsigned int i = 0; i < list.getCount(); i++) {
+			addTail(on->data);
+			on = on->next;
+		}
 	}
 	LinkedList(LinkedList<T>&& other) noexcept {
 		head = other.head;
