@@ -14,21 +14,21 @@ public:
     LLQ() = default;
     LLQ(const LLQ &origin) = default;
     LLQ(LLQ &&origin) = default;
-    LLQ operator=(const LLQ &origin) = default;
-    LLQ operator=(LLQ &&origin) = default;
+    LLQ &operator=(const LLQ &origin) = default;
+    LLQ &operator=(LLQ &&origin) = default;
     ~LLQ() override = default;
 
     // Insertion
     void enqueue(const T& item) override {
-        list->addTail(item);
+        list.addTail(item);
     }
 
     // Deletion
     T dequeue() override {
         if (list.getCount() == 0)
             throw std::runtime_error("LLQ dequeue on an empty queue");
-        T data = list->getHead();
-        list->removeHead();
+        T data = list.getHead();
+        list.removeHead();
         return data;
     }
 
@@ -36,11 +36,11 @@ public:
     T peek() const override {
         if (list.getCount() == 0)
             throw std::runtime_error("LLQ peek on an empty queue");
-        return list->getHead();
+        return list.getHead();
     }
 
     // Getter
     std::size_t getSize() const noexcept override {
-        return list->getSize();
+        return list.getSize();
     }
 };
