@@ -27,7 +27,7 @@ public:
     T dequeue() override {
         if (list.getCount() == 0)
             throw std::runtime_error("LLQ dequeue on an empty queue");
-        T data = list.getHead();
+        T data = list.getHead()->data;
         list.removeHead();
         return data;
     }
@@ -36,7 +36,7 @@ public:
     T peek() const override {
         if (list.getCount() == 0)
             throw std::runtime_error("LLQ peek on an empty queue");
-        return list.getHead();
+        return list.getHead()->data;
     }
 
     // Getter
