@@ -6,6 +6,7 @@ struct Node {
 	T data;
 	Node* prev;
 	Node* next;
+	Node(T data) : data(data), prev(nullptr), next(nullptr) {}
 };
 
 
@@ -101,22 +102,19 @@ const Node<T>* LinkedList<T>::getHead() const {
 }
 template<typename T>
 Node<T>* LinkedList<T>::getTail() {
-	return this->head;
+	return this->tail;
 }
 template<typename T>
 const Node<T>* LinkedList<T>::getTail() const {
-	return this->head;
+	return this->tail;
 }
 template<typename T>
 void LinkedList<T>::addHead(const T &data) {
+	count++;
 	Node<T>* newNode = new Node<T>(data);
 	if (head == nullptr) {
 		head = newNode;
 		tail = newNode;
-		head->next = nullptr;
-		tail->next = nullptr;
-		head->prev = nullptr;
-		head->prev = nullptr;
 		return;
 	}
 	this->head->prev = newNode;
@@ -126,14 +124,11 @@ void LinkedList<T>::addHead(const T &data) {
 }
 template<typename T>
 void LinkedList<T>::addTail(const T &data) {
+	count++;
 	Node<T>* newNode = new Node<T>(data);
 	if (head == nullptr) {
 		head = newNode;
 		tail = newNode;
-		head->next = nullptr;
-		tail->next = nullptr;
-		head->prev = nullptr;
-		tail->prev = nullptr;
 		return;
 	}
 	this->tail->next = newNode;
