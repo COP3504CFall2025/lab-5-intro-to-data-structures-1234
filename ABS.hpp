@@ -96,9 +96,6 @@ ABS<T>& ABS<T>::operator=(ABS&& rhs) noexcept {
 }
 template<typename T>
 void ABS<T>::push(const T& data) {
-    if (data == nullptr) {
-        throw std::runtime_error("Cannot push null value");
-    }
     if (curr_size_ == capacity_) {
         capacity_ *= scale_factor_;
         T* temp = new T[capacity_];
@@ -117,7 +114,7 @@ void ABS<T>::push(const T& data) {
 template<typename T>
 T ABS<T>::pop() {
     if (curr_size_ == 0) {
-        throw std::runtime_error("pop");
+        throw std::runtime_error("Cannot pop an empty array");
     }
     curr_size_--;
     return array_[curr_size_];
@@ -125,7 +122,7 @@ T ABS<T>::pop() {
 template<typename T>
 T ABS<T>::peek() const {
     if (curr_size_ == 0) {
-        throw std::runtime_error("cannot peak empty array");
+        throw std::runtime_error("Cannot peak empty array");
     }
     return array_[curr_size_ - 1];
 }
