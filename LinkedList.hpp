@@ -145,6 +145,7 @@ bool LinkedList<T>::removeHead() {
 		clear();
 		return true;
 	}
+	count--;
 	this->head = this->head->next;
 	delete this->head->prev;
 	this->head->prev = nullptr;
@@ -159,6 +160,7 @@ bool LinkedList<T>::removeTail() {
 		clear();
 		return true;
 	}
+	count--;
 	this->tail = this->tail->prev;
 	delete this->tail->next;
 	this->tail->next = nullptr;
