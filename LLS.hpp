@@ -26,6 +26,8 @@ public:
 
     // Deletion
     T pop() override {
+        if (list.getCount() == 0)
+            throw std::runtime_error("LLS pop on empty list");
         T data = list.getHead()->data;
         list.removeHead();
         return data;
@@ -33,6 +35,8 @@ public:
 
     // Access
     T peek() const override {
+        if (list.getCount() == 0)
+            throw std::runtime_error("LLS peek on empty list");
         return list.getHead()->data;
     }
 
