@@ -112,6 +112,7 @@ void LinkedList<T>::addHead(const T &data) {
 	Node<T>* newNode = new Node<T>(data);
 	this->head->prev = newNode;
 	newNode->next = this->head;
+	newNode->prev = nullptr;
 	this->head = newNode;
 }
 template<typename T>
@@ -119,6 +120,7 @@ void LinkedList<T>::addTail(const T &data) {
 	Node<T>* newNode = new Node<T>(data);
 	this->tail->next = newNode;
 	newNode->prev = this->tail;
+	newNode->next = nullptr;
 	this->tail = newNode;
 }
 template<typename T>
