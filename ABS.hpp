@@ -115,7 +115,7 @@ void ABS<T>::push(const T& data) {
     }
 }
 template<typename T>
-T ABS<T>::pop() override {
+T ABS<T>::pop() {
     if (curr_size_ == 0) {
         throw std::runtime_error("pop");
     }
@@ -123,11 +123,11 @@ T ABS<T>::pop() override {
     return array_[curr_size_];
 }
 template<typename T>
-T ABS<T>::peek() const override {
+T ABS<T>::peek() const {
     return array_[curr_size_ - 1];
 }
 template<typename T>
-[[nodiscard]] size_t ABS<T>::getSize() const noexcept override {
+[[nodiscard]] size_t ABS<T>::getSize() const noexcept {
     return curr_size_;
 }
 template<typename T>
