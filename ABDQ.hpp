@@ -37,9 +37,9 @@ public:
         capacity_ = other.capacity_;
         size_ = other.size_;
         front_ = 0;
-        back_ = size_ - 1;
+        back_ = other.size_;
         for (std::size_t i = 0; i < size_; i++) {
-            data_[i] = other.data_[(front_ + i) % capacity_];
+            data_[i] = other.data_[(other.front_ + i) % capacity_];
         }
     }
     ABDQ(ABDQ&& other) noexcept {
@@ -62,20 +62,15 @@ public:
         data_ = new T[other.capacity_];
         capacity_ = other.capacity_;
         size_ = other.size_;
-        front_ = other.front_;
-        back_ = other.back_;
+        front_ = 0;
+        back_ = other.size_;
         for (std::size_t i = 0; i < size_; i++) {
-            data_[i] = other.data_[(front_ + i) % capacity_];
+            data_[i] = other.data_[(other.front_ + i) % capacity_];
         }
         return *this;
     }
     ABDQ& operator=(ABDQ&& other) noexcept {
         if (this == &other) {
-            other.data_ = nullptr;
-            other.capacity_ = 0;
-            other.size_ = 0;
-            other.front_ = 0;
-            other.back_ = 0;
             return *this;
         }
         delete[] data_;
@@ -101,11 +96,13 @@ public:
             capacity_ *= SCALE_FACTOR;
             T* holder = new T[capacity_];
             for (std::size_t i = 0; i < size_; i++) {
-                data_[i] = data_[(front_ + i) % capacity_];
+                holder[i] = data_[(front_ + i) % (capacity_/SCALE_FACTOR)];
             }
+            front_ = 0;
             delete[] data_;
             data_ = holder;
         }
+        back_ = (front_ + size_) % capacity_;
         front_ = (front_ + capacity_ - 1) % capacity_;
         data_[front_] = item;
         size_++;
@@ -115,13 +112,15 @@ public:
             capacity_ *= SCALE_FACTOR;
             T* holder = new T[capacity_];
             for (std::size_t i = 0; i < size_; i++) {
-                holder[i] = data_[(front_ + i) % capacity_];
+                holder[i] = data_[(front_ + i) % (capacity_/SCALE_FACTOR)];
             }
+            front_ = 0;
+            back_  = size_;
             delete[] data_;
             data_ = holder;
         }
-        back_ = (back_ + 1) % capacity_;
         data_[back_] = item;
+        back_ = (back_ + 1) % capacity_;
         size_++;
     }
 
@@ -140,7 +139,7 @@ public:
         if (size_ == 0) {
             throw std::runtime_error("Empty queue");
         }
-        T data = data_[back_];
+        T data = data_[back_ - 1];
         std::size_t index = (back_ + capacity_ - 1) % capacity_;
         back_ = index;
         size_--;
@@ -149,15 +148,20 @@ public:
 
     // Access
     const T& front() const override {
+        if (size_ == 0) {
+            throw std::runtime_error("Empty queue");
+        }
         return data_[front_];
     }
     const T& back() const override {
-        return data_[back_ - 1];
+        if (size_ == 0) {
+            throw std::runtime_error("Empty queue");
+        }
+        return data_[(back_ + capacity_ - 1) % capacity_];
     }
 
     // Getters
     std::size_t getSize() const noexcept override {
         return size_;
     }
-
 };
