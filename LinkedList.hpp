@@ -141,6 +141,10 @@ bool LinkedList<T>::removeHead() {
 	if (this->head == nullptr) {
 		return false;
 	}
+	if (this->head->next == nullptr) {
+		clear();
+		return true;
+	}
 	this->head = this->head->next;
 	delete this->head->prev;
 	this->head->prev = nullptr;
@@ -150,6 +154,10 @@ template<typename T>
 bool LinkedList<T>::removeTail() {
 	if (this->tail == nullptr) {
 		return false;
+	}
+	if (this->tail->prev == nullptr) {
+		clear();
+		return true;
 	}
 	this->tail = this->tail->prev;
 	delete this->tail->next;
