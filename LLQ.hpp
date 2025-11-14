@@ -11,9 +11,12 @@ private:
     LinkedList<T> list;
 public:
     // Constructor
-    LLQ() {
-        list = new LinkedList<T>();
-    }
+    LLQ() = default;
+    LLQ(const LLQ &origin) = default;
+    LLQ(LLQ &&origin) = default;
+    LLQ operator=(const LLQ &origin) = default;
+    LLQ operator=(LLQ &&origin) = default;
+    ~LLQ() override = default;
 
     // Insertion
     void enqueue(const T& item) override {
@@ -22,6 +25,8 @@ public:
 
     // Deletion
     T dequeue() override {
+        if (list.getCount() == 0)
+            throw std::runtime_error("LLQ dequeue on an empty queue");
         T data = list->getHead();
         list->removeHead();
         return data;
@@ -29,14 +34,13 @@ public:
 
     // Access
     T peek() const override {
+        if (list.getCount() == 0)
+            throw std::runtime_error("LLQ peek on an empty queue");
         return list->getHead();
     }
 
     // Getter
     std::size_t getSize() const noexcept override {
         return list->getSize();
-    }
-    ~LLQ() override {
-        list.~LinkedList<T>();
     }
 };
