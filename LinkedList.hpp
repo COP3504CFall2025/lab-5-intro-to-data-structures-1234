@@ -74,7 +74,7 @@ private:
 template<typename T>
 void LinkedList<T>::printForward() const {
 	Node<T>* current = this->head;
-	for (int i = 0; i < count; i++) {
+	for (unsigned int i = 0; i < count; i++) {
 		std::cout << current->data << std::endl;
 		current = current->next;
 	}
@@ -82,7 +82,7 @@ void LinkedList<T>::printForward() const {
 template<typename T>
 void LinkedList<T>::printReverse() const {
 	Node<T>* current = this->tail;
-	for (int i = count - 1; i <= 0; i--) {
+	for (unsigned int i = count - 1; i <= 0; i--) {
 		std::cout << current->data << std::endl;
 		current = current->prev;
 	}
@@ -110,6 +110,15 @@ const Node<T>* LinkedList<T>::getTail() const {
 template<typename T>
 void LinkedList<T>::addHead(const T &data) {
 	Node<T>* newNode = new Node<T>(data);
+	if (head == nullptr) {
+		head = newNode;
+		tail = newNode;
+		head->next = nullptr;
+		tail->next = nullptr;
+		head->prev = nullptr;
+		head->prev = nullptr;
+		return;
+	}
 	this->head->prev = newNode;
 	newNode->next = this->head;
 	newNode->prev = nullptr;
@@ -118,6 +127,15 @@ void LinkedList<T>::addHead(const T &data) {
 template<typename T>
 void LinkedList<T>::addTail(const T &data) {
 	Node<T>* newNode = new Node<T>(data);
+	if (head == nullptr) {
+		head = newNode;
+		tail = newNode;
+		head->next = nullptr;
+		tail->next = nullptr;
+		head->prev = nullptr;
+		tail->prev = nullptr;
+		return;
+	}
 	this->tail->next = newNode;
 	newNode->prev = this->tail;
 	newNode->next = nullptr;
