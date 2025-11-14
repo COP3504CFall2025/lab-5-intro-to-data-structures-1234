@@ -46,7 +46,7 @@ public:
 		head = nullptr;
 		tail = nullptr;
 		count = 0;
-		Node<T>* on = list.getHead();
+		const Node<T>* on = list.getHead();
 		for (unsigned int i = 0; i < list.getCount(); i++) {
 			addTail(on->data);
 			on = on->next;
@@ -182,7 +182,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
 	}
 	const Node<T>* current = rhs.getHead();
 	for (unsigned int  i = 0; i < rhs.getCount(); i++) {
-		this.addTail(current->data);
+		addTail(current->data);
 	}
 	return *this;
 	// if (this != &rhs) {
