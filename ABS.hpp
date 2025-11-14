@@ -91,6 +91,9 @@ ABS<T>& ABS<T>::operator=(ABS&& rhs) noexcept {
         capacity_ = rhs.capacity_;
         curr_size_ = rhs.curr_size_;
         array_ = rhs.array_;
+        rhs.array_ = nullptr;
+        rhs.curr_size_ = 0;
+        rhs.capacity_ = 0;
     }
     return *this;
 }
@@ -141,6 +144,7 @@ template<typename T>
 template<typename T>
 ABS<T>::~ABS() noexcept {
     delete[] array_;
+    array_ = nullptr;
     curr_size_ = 0;
     capacity_ = 0;
 }
