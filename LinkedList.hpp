@@ -105,14 +105,14 @@ const Node<T>* LinkedList<T>::getTail() const {
 }
 template<typename T>
 void LinkedList<T>::addHead(const T &data) {
-	Node<T>* newNode = &new Node<T>(data);
+	Node<T>* newNode = new Node<T>(data);
 	this->head->prev = newNode;
 	newNode->next = this->head;
 	this->head = newNode;
 }
 template<typename T>
 void LinkedList<T>::addTail(const T &data) {
-	Node<T>* newNode = &new Node<T>(data);
+	Node<T>* newNode = new Node<T>(data);
 	this->tail->next = newNode;
 	newNode->prev = this->tail;
 	this->tail = newNode;
