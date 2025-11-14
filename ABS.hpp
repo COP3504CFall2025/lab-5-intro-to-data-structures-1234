@@ -43,8 +43,8 @@ private:
 };
 template<typename T>
 ABS<T>::ABS() {
-    array_ = nullptr;
-    capacity_ = 0;
+    array_ = new T[1];
+    capacity_ = 1;
     curr_size_ = 0;
 }
 template<typename T>
