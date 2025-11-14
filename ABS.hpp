@@ -117,7 +117,7 @@ void ABS<T>::push(const T& data) {
 template<typename T>
 T ABS<T>::pop() override {
     if (curr_size_ == 0) {
-        throw std::out_of_range("pop");
+        throw std::runtime_error("pop");
     }
     curr_size_--;
     return array_[curr_size_];

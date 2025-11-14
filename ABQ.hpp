@@ -113,7 +113,7 @@ template<typename T>
 template<typename T>
 void ABQ<T>::enqueue(const T &data) {
     if (curr_size_ == capacity_) {
-        throw std::out_of_range("ABQ out of range");
+        throw std::runtime_error("ABQ out of range");
     }
     array_[curr_size_] = data;
     curr_size_++;
@@ -121,14 +121,14 @@ void ABQ<T>::enqueue(const T &data) {
 template<typename T>
 [[nodiscard]] T ABQ<T>::peek() const {
     if (curr_size_ == 0) {
-        throw std::out_of_range("Cannot peek an empty array");
+        throw std::runtime_error("Cannot peek an empty array");
     }
     return array_[0];
 }
 template<typename T>
 T ABQ<T>::dequeue() {
     if (curr_size_ == 0) {
-        throw std::out_of_range("Cannot dequeue an empty array");
+        throw std::runtime_error("Cannot dequeue an empty array");
     }
     T data = array_[0];
     for (size_t i = 0; i < curr_size_ - 1; i++) {
