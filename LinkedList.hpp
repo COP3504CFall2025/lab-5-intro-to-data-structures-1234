@@ -209,6 +209,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
 	const Node<T>* current = rhs.getHead();
 	for (unsigned int  i = 0; i < rhs.getCount(); i++) {
 		addTail(current->data);
+		current = current->next;
 	}
 	return *this;
 	// if (this != &rhs) {
