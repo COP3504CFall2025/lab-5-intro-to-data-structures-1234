@@ -142,12 +142,12 @@ T ABQ<T>::dequeue() {
         capacity_ /= scale_factor_;
         T* temp = new T[capacity_];
         for (size_t i = 0; i < curr_size_; i++) {
-            temp[i] = array_[i];
+            temp[i] = array_[i+ 1];
         }
         delete[] array_;
         array_ = temp;
     } else
-        for (size_t i = 0; i < curr_size_ - 1; i++) {
+        for (size_t i = 0; i < curr_size_; i++) {
             array_[i] = array_[i + 1];
         }
 
