@@ -173,27 +173,39 @@ LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& other) noexcept {
 }
 template<typename T>
 LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
-	if (this != &rhs) {
-		this->count = rhs.count;
-		this->clear();
-		Node<T>* current = rhs.head;
-		if (rhs.count != 0) {
-			this->addHead(current->data);
-			if (rhs.count == 1) {
-				this->head->next = nullptr;
-				return *this;
-			}
-			current = current->next;
-		} else {
-			this->head = nullptr;
-			this->tail = nullptr;
-			this->count = 0;
-			return *this;
-		}
-		for (int i = 1; i < rhs.count; i++) {
-			this->addTail(current->data);
-			current = current->next;
-		}
+	if (this == &rhs) {
+		return *this;
+	}
+	clear();
+	if (rhs.getCount() == 0) {
+		return *this;
+	}
+	const Node<T>* current = rhs.getHead();
+	for (unsigned int  i = 0; i < rhs.getCount(); i++) {
+		this.addTail(current->data);
 	}
 	return *this;
+	// if (this != &rhs) {
+	// 	this->clear();
+	// 	this->count = rhs.count;
+	// 	Node<T>* current = rhs.head;
+	// 	if (rhs.count != 0) {
+	// 		this->addTail(current->data);
+	// 		if (rhs.count == 1) {
+	// 			this->head->next = nullptr;
+	// 			return *this;
+	// 		}
+	// 		current = current->next;
+	// 	} else {
+	// 		this->head = nullptr;
+	// 		this->tail = nullptr;
+	// 		this->count = 0;
+	// 		return *this;
+	// 	}
+	// 	for (int i = 1; i < rhs.count; i++) {
+	// 		this->addTail(current->data);
+	// 		current = current->next;
+	// 	}
+	// }
+	// return *this;
 }
