@@ -150,11 +150,11 @@ void LinkedList<T>::clear() {
 		return;
 	}
 	Node<T>* current = this->head;
-	for (int i = 0; i < this->count - 1; i++) {
-		current = current->next;
-		delete current->prev;
+	while (current != nullptr) {
+		Node<T>* next = current->next;
+		delete current;
+		current = next;
 	}
-	delete current;
 	this->head = nullptr;
 	this->tail = nullptr;
 	this->count = 0;
