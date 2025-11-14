@@ -113,7 +113,13 @@ template<typename T>
 template<typename T>
 void ABQ<T>::enqueue(const T &data) {
     if (curr_size_ == capacity_) {
-        throw std::runtime_error("ABQ out of range");
+        T* temp = new T[capacity_ * scale_factor_];
+        for (size_t i = 0; i < curr_size_; i++) {
+            temp[i] = array_[i];
+        }
+        delete[] array_;
+        array_ = temp;
+        capacity_ *= scale_factor_;
     }
     array_[curr_size_] = data;
     curr_size_++;
